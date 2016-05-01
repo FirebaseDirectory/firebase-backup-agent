@@ -1,0 +1,22 @@
+{
+  "name": "firebase-backup-agent",
+  "version": "1.0.0",
+  "description": "Firebase backup agent",
+  "main": "program.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://fabiogusmao@github.com/fabiogusmao/firebase-backup-agent.git"
+  },
+  "keywords": [
+    "firebase"
+  ],
+  "author": "fabio.gusmao@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fabiogusmao/firebase-backup-agent/issues"
+  },
+  "homepage": "https://github.com/fabiogusmao/firebase-backup-agent#readme"
+}
