@@ -10,6 +10,15 @@ var globalConfig = null;
 console.log("### Firebase Backupp Agent ###");
 
 function loadConfig() {
+    
+     try{
+        fs.accessSync(FB_CONFIG_FILE, fs.F_OK);
+    }catch(e){
+        console.log("The configuration file '" + FB_CONFIG_FILE + "' has not been created yet! See README file for instructions.");
+        process.exit(-1);
+    }    
+    
+    
     console.log("Loading configuration from '" + FB_CONFIG_FILE + "'...");
     globalConfig = JSON.parse(fs.readFileSync(FB_CONFIG_FILE, 'utf8'));
     console.log("Configuration loaded!");
