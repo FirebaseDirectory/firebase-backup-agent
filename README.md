@@ -5,8 +5,7 @@ Ths Node.js program downloads the latest version of your Firebase JSON  and back
 
 ## Installation ##
 
-1) Clone or download this repository
-2) Open a command prompt and type:
+Clone or download this repository, open a command prompt and type:
 
 	npm install
 
