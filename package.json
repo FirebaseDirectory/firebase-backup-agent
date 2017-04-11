@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/fabiogusmao/firebase-backup-agent/issues"
   },
-  "homepage": "https://github.com/fabiogusmao/firebase-backup-agent#readme"
+  "homepage": "https://github.com/fabiogusmao/firebase-backup-agent#readme",
+  "dependencies": {
+    "aws-sdk": "^2.40.0",
+    "firebase-admin": "^4.2.0"
+  }
 }
