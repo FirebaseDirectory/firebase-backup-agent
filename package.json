@@ -4,7 +4,7 @@
   "description": "Firebase backup agent",
   "main": "program.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "debug": "program.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/fabiogusmao/firebase-backup-agent#readme",
   "dependencies": {
+    "async-file": "^2.0.2",
     "aws-sdk": "^2.40.0",
     "firebase-admin": "^4.2.0"
   }

@@ -37,41 +37,38 @@ function loadConfig() {
 }
 
 
-function getLatestVersion(success, failure) {
+async function getLatestVersion() {
 
     var db = admin.database();
 
     var ref = db.ref('/');
 
-    ref.once('value', function (snapshot) {
-        var json = JSON.stringify(snapshot.val());
-        success(json);
-    });
+    var snapshot = await ref.once('value');
+    var json = JSON.stringify(snapshot.val());
+    return json;
 }
 
 
-function loadSnapshot(tag, success, error) {
-    device.getSnapshot(tag, success, error);
+async function loadSnapshot(tag) {
+    return await device.getSnapshot(tag);
 }
 
-function compareWithLatesst(json, success, error) {
-    loadSnapshot('latest', function (latest) {
-        if (latest === false) {
-            success(false);
-            return;
-        }
-        var equal = json === latest;
-        if (equal) {
-            console.log("No changes!");
-        } else {
-            "JSON changed!";
-        }
-        success(equal);
-    }, error);
+async function compareWithLatesst(json) {
+    var latest = await loadSnapshot('latest');
+    if (latest === false) {
+        return false;
+    }
+    var equal = json === latest;
+    if (equal) {
+        console.log("No changes!");
+    } else {
+        "JSON changed!";
+    }
+    return equal;
 }
 
-function saveSnapshot(json, tag, success, error) {
-    device.saveSnapshot(json, tag, success, error);
+async function saveSnapshot(json, tag) {
+    await device.saveSnapshot(json, tag);
 }
 
 function createTimestampTag() {
@@ -81,7 +78,7 @@ function createTimestampTag() {
     return tag;
 }
 
-function main() {
+async function main() {
 
     loadConfig();
 
@@ -94,21 +91,17 @@ function main() {
         databaseURL: globalConfig.firebase.databaseURL
     });
 
-    getLatestVersion(function (json) {
+    var json = await getLatestVersion();
 
-        compareWithLatesst(json, function (equal) {
-            if (!equal) {
-                var tag = createTimestampTag();
-                saveSnapshot(json, tag, function () {
-                    saveSnapshot(json, 'latest', function () {
-                        console.log('Complete!');
-                        process.exit(0);
-                    });
-                });
-            }else{
-                process.exit(0);
-            }
-        });
-    });
+    var equal = await compareWithLatesst(json);
+    if (!equal) {
+        var tag = createTimestampTag();
+        await saveSnapshot(json, tag);
+        await saveSnapshot(json, 'latest');
+        console.log('Complete!');
+        process.exit(0);
+    } else {
+        process.exit(0);
+    }
 }
 main();

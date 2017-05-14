@@ -1,6 +1,6 @@
 
 var path = require("path");
-var fs = require("fs");
+var fs = require("async-file");
 
 class FileSysDevice {
     constructor(dest) {
@@ -14,29 +14,24 @@ class FileSysDevice {
         return filePath;
     }
 
-    getSnapshot(tag, success, error) {
+    async getSnapshot(tag) {
         var filePath = this.getSnapshotFilename(tag);
 
         console.log('Loading snapshot from ' + filePath);
 
-        fs.access(filePath, fs.constants.R_OK, function (err) {
-            if (err) {
-                console.log('\tFile not found!');
-                success(false);
-            } else {
-
-                fs.readFile(filePath, function (err, data) {
-                    data = data.toString('utf8');
-                    success(data);
-                });
-            }
+        var err = await fs.access(filePath, fs.constants.R_OK).then(async function () {
+            var data = await fs.readFile(filePath);
+            data = data.toString('utf8');
+            return data;
+        }, async function () {
+            console.log('\tFile not found!');
+            return false;
         });
     }
-    saveSnapshot(json, tag, success, error) {
+    async saveSnapshot(json, tag) {
         var filePath = this.getSnapshotFilename(tag);
         console.log('Saving JSON to "' + filePath + '"...');
-
-        fs.writeFile(filePath, json, success);
+        await fs.writeFile(filePath, json);
     }
 }
 
