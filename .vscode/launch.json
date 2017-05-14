@@ -1,0 +1,71 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Backup",
+            "port": 5858,
+            "program": "${workspaceRoot}\\program.js",
+            "args": [
+                 "--backup"
+            ]
+        },{
+            "type": "node",
+            "request": "launch",
+            "name": "Get",
+            "port": 5858,
+            "program": "${workspaceRoot}\\program.js",
+            "args": [
+                 "--get",
+                 "fetched.json"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Get Node",
+            "program": "${workspaceRoot}\\program.js",
+            "args": [
+                "--getnode",
+                "/games",
+                "fetched.json"
+            ]   
+        }, 
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Set",
+            "program": "${workspaceRoot}\\program.js",
+            "args": [
+                "--set",
+                "./examples/file1.json"
+            ]   
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Set Node",
+            "program": "${workspaceRoot}\\program.js",
+            "args": [
+                "--setnode",
+                "/games",
+                "./examples/file2.json"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Update Node",
+            "program": "${workspaceRoot}\\program.js",
+            "args": [
+                "--updatenode",
+                "/games",
+                "./examples/file3.json"
+            ]
+        }
+    ]
+}

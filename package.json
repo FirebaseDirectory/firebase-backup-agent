@@ -4,7 +4,7 @@
   "description": "Firebase backup agent",
   "main": "program.js",
   "scripts": {
-    "debug": "program.js"
+    "start": "node program.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "dependencies": {
     "async-file": "^2.0.2",
     "aws-sdk": "^2.40.0",
-    "firebase-admin": "^4.2.0"
+    "firebase-admin": "^4.2.0",
+    "stdio": "^0.2.7"
   }
 }
